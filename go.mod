@@ -1,4 +1,4 @@
-module Gin-In-Action
+module example.com/ea/gin-in-action
 
 go 1.19
 
