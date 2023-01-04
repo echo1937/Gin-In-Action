@@ -36,8 +36,19 @@ func main() {
 		Created time.Time `xorm:"created"`
 		Updated time.Time `xorm:"updated"`
 	}
-	age20 := User{Age: 20}
-	affected, _ := engine.ID(1000).Update(&age20)
+
+	// .Update(&user)
+	user := User{Age: 20}
+	affected, _ := engine.ID(1000).Update(&user)
 	fmt.Println(affected)
+
+	// .Delete(&user)
+	user = User{Name: "测试一号"}
+	affected, _ = engine.ID(1001).Delete(&user)
+	fmt.Println(affected)
+
+	// engine.Exec
+	exec, _ := engine.Exec("update user set age=? where id=?", 10, 1003)
+	fmt.Println(exec)
 
 }
