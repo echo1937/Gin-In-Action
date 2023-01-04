@@ -43,8 +43,8 @@ func main() {
 	fmt.Println(affected)
 
 	// .Delete(&user)
-	user = User{Name: "测试一号"}
-	affected, _ = engine.ID(1001).Delete(&user)
+	user = User{}
+	affected, _ = engine.ID(1001).Delete(&user) // 删除ID为1000的记录可以传入空User{}
 	fmt.Println(affected)
 
 	// engine.Exec
