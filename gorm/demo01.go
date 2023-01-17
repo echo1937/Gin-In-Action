@@ -40,15 +40,17 @@ func main() {
 
 	u1 := UserInfo{1, "七米", "男", "篮球"}
 	u2 := UserInfo{2, "沙河娜扎", "女", "足球"}
+
 	// 创建记录
 	db.Create(&u1)
 	db.Create(&u2)
-	// 查询
-	var u = new(UserInfo)
-	db.First(u)
-	fmt.Printf("%#v\n", u)
 
-	var uu UserInfo
+	// 查询
+	var u = new(UserInfo) // 赋值，声明 + 初始化
+	db.First(u)
+	fmt.Printf("%#v\n", *u)
+
+	var uu UserInfo // 声明变量 uu
 	db.Find(&uu, "hobby=?", "足球")
 	fmt.Printf("%#v\n", uu)
 
