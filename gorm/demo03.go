@@ -6,10 +6,10 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-// User 用户信息
-type User struct {
-	ID   int64
-	Name string `gorm:"default:'小王子'"`
+// Person 用户信息
+type Person struct {
+	gorm.Model
+	Name string
 	Age  int
 }
 
@@ -31,14 +31,15 @@ func main() {
 	}
 	defer db.Close()
 
-	db.AutoMigrate(&User{})
+	db.AutoMigrate(&Person{})
 
-	//var age int8 = 18
+	p1 := Person{Name: "七米", Age: 18}
+	p2 := Person{Name: "沙河娜扎", Age: 29}
+	db.Create(&p1)
+	db.Create(&p2)
 
-	user := User{Name: "只因", Age: 18}
-	fmt.Println(db.NewRecord(user))
-	// 这样就能在有default约束的情况下插入NULL值
-	db.Debug().Exec(`insert into users (name,age) values (NULL,18),('toy',25)`)
-	db.Debug().Create(&user)
-	fmt.Println(db.NewRecord(&user))
+	var people []Person
+	db.Debug().Find(&people)
+	fmt.Printf("users:%#v\n", people)
+
 }
