@@ -17,7 +17,7 @@ func main() {
 
 	// 2、加载静态资源，relativePath指url的地址，root指对应文件系统的地址
 	// 访问localhost:8082/static/{file}可获取${working_directory}/gin/static目录下的file文件
-	ginServer.Static("./static", "gin/static")
+	ginServer.Static("static", "gin/static")
 
 	// 3、404页面设置
 	ginServer.NoRoute(func(context *gin.Context) {
